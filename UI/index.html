@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../Plugins/leaflet/leaflet.css" />
+    <script src="../Plugins/leaflet/leaflet.js"></script>
+
+    <link rel="stylesheet" href="../Plugins/PolylineMeasure/Leaflet.PolylineMeasure.css" />
+    <script src="../Plugins/PolylineMeasure/Leaflet.PolylineMeasure.js"></script>
+
+    <link rel="stylesheet" href="../Plugins/SimpleGraticule/L.SimpleGraticule.css" />
+    <script src="../Plugins/SimpleGraticule/L.SimpleGraticule.js"></script>
+
+    <script src="../Plugins/EdgeScaleBar/leaflet.edgescalebar.js"></script>
+
+    <script src="../Plugins/RotatedMarker/leaflet.rotatedMarker.js"></script>
+
+    <script src="../Plugins/turf/turf.min.js" charset="utf-8"></script>
+
+    <link rel="stylesheet" href="style.css"></link>
+
+    <script type="text/javascript" src="../configuration/configuration.json"></script>
+</head>
+
+<body>
+    <div id="EntireScreen" class="EntireScreen-Container-Without-SidePanel">
+        <!-- Left Part: The side panel -->
+        <div id="displayOptionsSidePanel" class="Display-Options-SidePanel">
+            <!-- 1st section: for hiding or showing specific elements on the map. -->
+            <div>
+                <fieldset id="visibility" class="Options-Rounded-Corners">
+                    <legend class="SidePanel-Title"> Visibility </legend>
+                    <div class="Visibility-Container">
+                        <div class="General-Horizontal-items">
+                            <p id="tracksControl" class="visibility-buttons" onclick="showHideTracks()"> &#9992; </p>
+                            <p id="battalionsControl" class="visibility-buttons" onclick="showHideBattalions()"> &#9991;
+                            </p>
+                            <p id="tooltipControl" class="visibility-buttons" onclick="showHidetoolTip()"> &#x26B2; </p>
+                            <p id="gridControl" class="visibility-buttons" style="color: white;" onclick="showHideGrid()"> &#9839; </p>
+                            <p id="scaleControl" class="visibility-buttons" style="color: white;" onclick="showHideScale()"> &#9868; </p>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <hr class="solid">
+            <div>
+                <fieldset class="Options-Rounded-Corners">
+                    <legend class="SidePanel-Title"> Map </legend>
+                    <div class="Visibility-Container">
+                        <div class="General-Horizontal-items">
+                            <p id="baseLayerControl" class="Layer-Control" onclick="baseLayerToggle()" style="color: #66ff66"> Base </p>
+                            <p id="darkLayerControl" class="Layer-Control" onclick="darkLayerToggle()"> dark </p>
+                            <p id="heightsLayerControl" class="Layer-Control" onclick="heightsLayerToggle()"> Height
+                            </p>
+                            <p id="roadsLayerControl" class="Layer-Control" onclick="roadsLayerToggle()"> Road </p>
+                            <p id="borderLayerControl" class="Layer-Control" onclick="borderLayerToggle()"> Border </p>
+                            <p id="namesLayerControl" class="Layer-Control" onclick="namesLayerToggle()"> Name </p>
+                            <p id="fullLayerControl" class="Layer-Control" onclick="fullLayerToggle()"> Full </p>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <hr class="solid">
+            <!-- 3rd section: Showing the coordinates being currently hovered over by the mouse. -->
+            <!-- <div>
+                <fieldset id="coordinates" class="Options-Rounded-Corners">
+                    <legend class="SidePanel-Title"> Coordinates </legend>
+                    <div id="coords"></div>
+                </fieldset>
+            </div> -->
+            <div>
+                <fieldset class="Options-Rounded-Corners">
+                    <legend class="SidePanel-Title">System<br>Mode</legend>
+                    <table id="systemModeTable" class="Table-Element" style="border-bottom: solid; border-bottom-color: #673ab7;">
+                    </table>
+                    <div style="display: flex; flex-direction: row; justify-content: start;">
+                        <div class="System-Mode-Table-Recording-Container">
+                            <div>
+                                <p class="statusTableElement System-Mode-Table-Header">System<br>Recording</p>
+                            </div>
+                            <div>
+                                <p class="statusTableElement" style="margin: 5px; color: white;" id="systemRecordingStatus"></p>
+                            </div>
+                        </div>
+                        <div class="System-Mode-Table-Recording-Container">
+                            <div>
+                                <p class="statusTableElement System-Mode-Table-Header">Simulation<br>Name:</p>
+                            </div>
+                            <div>
+                                <p class="statusTableElement" style="margin: 5px; color: white;" id="simulationName">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="raidRecordingDiv" style="margin: 5px; display: flex; flex-direction: row; flex-wrap: wrap;">
+                        <span class="statusTableElement System-Mode-Table-Header" style="margin: 5px;">Raid<br>Recording</span>
+                        <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; flex-wrap: wrap;">
+                            <input type="text" name="raidRecordingName" id="raidRecordingName" style="width: 100px; margin: 5px; color: black;">
+                            <button id="raidRecordingButton" onclick="startRecordingRaid()">Start</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <hr class="solid">
+            <div>
+                <fieldset class="Options-Rounded-Corners">
+                    <legend class="SidePanel-Title"> BIB </legend>
+                    <div id="parametersListDiv" class="General-Horizontal-items" style="margin: 5px;">
+                        <div>
+                            <label for="A" class="Attribute-Labels"> A </label>
+                            <input type="checkbox" id="A" checked>
+                        </div>
+                        <div>
+                            <label for="B" class="Attribute-Labels"> B </label>
+                            <input type="checkbox" id="B">
+                        </div>
+                        <div>
+                            <label for="C" class="Attribute-Labels"> C </label>
+                            <input type="checkbox" id="C">
+                        </div>
+                        <div>
+                            <label for="D" class="Attribute-Labels"> D </label>
+                            <input type="checkbox" id="D">
+                        </div>
+                        <div>
+                            <label for="E" class="Attribute-Labels"> E </label>
+                            <input type="checkbox" id="E">
+                        </div>
+                        <div>
+                            <label for="F" class="Attribute-Labels"> F </label>
+                            <input type="checkbox" id="F">
+                        </div>
+                        <div>
+                            <label for="G" class="Attribute-Labels"> G </label>
+                            <input type="checkbox" id="G" checked>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <hr class="solid">
+            <div style="width: 100%;">
+                <fieldset class="Options-Rounded-Corners">
+                    <legend class="SidePanel-Title"> Status </legend>
+                    <table id="statusTable" class="Table-Element">
+                    </table>
+                </fieldset>
+            </div>
+            <hr class="solid">
+            <div>
+                <fieldset class="Options-Rounded-Corners">
+                    <legend class="SidePanel-Title"> Engagements </legend>
+                    <table id="batEngagementTable" class="Table-Element">
+                    </table>
+                </fieldset>
+            </div>
+            <hr class="solid">
+        </div>
+        <div id="actionsSidePanel" class="Actions-SidePanel">
+            <div class="Action-Title">
+                <fieldset class="Options-Rounded-Corners">
+                    <legend class="SidePanel-Title"> High Level<br>Commands </legend>
+                    <div class="Action-Container">
+                        <select id="highLevelCommandSelect" class="Action-Select"> </select>
+                        <button onclick="applyHighLevelEngagement()" id="highlevelApplyButton" class="Apply-Button">
+                            Apply </button>
+                    </div>
+                </fieldset>
+            </div>
+            <hr class="solid">
+            <div class="Action-Title">
+                <fieldset class="Options-Rounded-Corners">
+                    <legend class="SidePanel-Title"> Brigade Reply<br>Commands </legend>
+                    <div class="Action-Container">
+                        <select id="brigadeReplyCommandSelect" class="Action-Select"> </select>
+                        <button onclick="applyBrigadeReplyEngagement()" id="brigadeReplyApplyButton" class="Apply-Button">
+                            Apply </button>
+                    </div>
+                </fieldset>
+            </div>
+            <hr class="solid">
+            <div class="Action-Title">
+                <fieldset class="Options-Rounded-Corners">
+                    <legend class="SidePanel-Title"> Tactical<br>Commands </legend>
+                    <div class="Action-Container">
+                        <select id="battalionCommandSelect" class="Action-Select"> </select>
+                        <button onclick="applyBattalionEngagement()" id="battalionApplyButton" class="Apply-Button">
+                            Apply </button>
+                    </div>
+                </fieldset>
+            </div>
+            <hr class="solid">
+        </div>
+        <div id="mapid" style="cursor: auto;">
+            <div class="Options-Buttons-Container">
+                <button onclick="showDisplayOptions()"> <img src="../images/work.png" width="45px" height="45px">
+                </button>
+                <button onclick="showActions()"> <img src="../images/action-figure.png" width="45px" height="45px">
+                </button>
+            </div>
+            <div id="info" class="Info-Box">
+                <p></p>
+            </div>
+            <div id="coords" class="Coordinates-Box">
+                <p></p>
+            </div>
+        </div>
+    </div>
+    <script src="../js/main.js">
+    </script>
+</body>
+
+</html>

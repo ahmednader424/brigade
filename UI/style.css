@@ -1,0 +1,359 @@
+* {
+    box-sizing: border-box;
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+
+/* Fonts */
+
+@font-face {
+    font-family: "marcelo";
+    src: url("../fonts/marcelo/Marcelo.otf");
+}
+
+
+/* Element selectors */
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    cursor: auto;
+}
+
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+::-webkit-scrollbar-track {
+    background: black;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #673ab7;
+}
+
+
+/* Specific Classes */
+
+.EntireScreen-Container-Without-SidePanel {
+    display: grid;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+}
+
+.EntireScreen-Container-With-SidePanel {
+    display: grid;
+    grid-template-columns: minmax(100px, 18%) 1fr;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+}
+
+.Display-Options-SidePanel {
+    background-color: black;
+    display: none;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden auto;
+    border-right: solid;
+    border-color: #673ab7;
+}
+
+.Visibility-Container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.General-Horizontal-items {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.Table-Element {
+    color: white;
+    text-align: center;
+    text-transform: capitalize;
+    width: 100%;
+}
+
+.Actions-SidePanel {
+    background-color: black;
+    display: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.Options-Rounded-Corners {
+    padding: 0;
+    margin: 5px;
+    border: solid;
+    border-color: #673ab7;
+    border-radius: 20px;
+    align-items: baseline;
+}
+
+.Action-Container {
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}
+
+.Engage-Line {
+    fill: none;
+    stroke-dasharray: 10, 10;
+    stroke-width: 1;
+}
+
+.Wilco-Line {
+    fill: none;
+    stroke-dasharray: 10, 2, 10;
+    stroke-width: 1;
+}
+
+.Fire-Line {
+    animation: fade 1s infinite;
+    stroke-width: 1;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 1;
+    }
+    20% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 0.3;
+    }
+    20% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.Options-Buttons-Container {
+    float: left;
+    width: 4%;
+    height: 100px;
+    z-index: 500;
+    position: fixed;
+}
+
+.Options-Buttons-Container button {
+    display: block;
+    background-color: inherit;
+    color: black;
+    padding: 8px 7px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.leaflet-control-scale-line {
+    width: 13%;
+    position: fixed;
+    top: 42%;
+    left: 0;
+    text-align: center;
+}
+
+div.container {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr 0.08fr 1fr;
+    grid-template-rows: 1fr 5fr 1fr;
+    grid-template-areas: "head head head" "panleft mainbody panright" "foot foot foot";
+}
+
+div.header {
+    background: white;
+    grid-area: head;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 0.08fr 1fr;
+    border: groove;
+}
+
+div.footer {
+    background: white;
+    grid-area: foot;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 0.08fr 1fr;
+    border: groove;
+}
+
+div.panel {
+    background: white;
+    padding: 10px;
+}
+
+div.panel.left {
+    grid-area: panleft;
+}
+
+div.panel.right {
+    grid-area: panright;
+}
+
+div.mainbody {
+    background: white;
+    grid-area: mainbody;
+    padding: 10px;
+}
+
+.SidePanel-Title {
+    font-size: 0.4vw;
+    text-align: center;
+    font-weight: bold;
+    overflow-wrap: anywhere;
+    font-family: marcelo;
+    color: #1c72ea;
+}
+
+.visibility-buttons {
+    color: #66ff66;
+    width: 40px;
+    height: 40px;
+    font-size: 2em;
+    margin: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.latlonText {
+    color: white;
+    text-align: center;
+    font-size: 1.2em;
+    overflow-wrap: anywhere;
+    margin: 5px;
+    text-align-last: center;
+}
+
+hr.solid {
+    border: 0.1em solid #673ab7;
+    width: 100%;
+    height: 1px;
+}
+
+.infoText {
+    font-size: 1em;
+    font-weight: bold;
+    text-align: left;
+    width: fit-content;
+    margin: 0px 5px 5px 0px;
+    color: crimson;
+}
+
+.Info-Box {
+    height: fit-content;
+    width: fit-content;
+    position: absolute;
+    top: 5px;
+    right: 0%;
+    z-index: 600;
+}
+
+.Coordinates-Box {
+    height: fit-content;
+    width: fit-content;
+    position: absolute;
+    bottom: 3%;
+    left: 3%;
+    z-index: 600;
+}
+
+.statusTableElement {
+    margin: 1px;
+    font-size: 1vw;
+    padding: 0;
+}
+
+.Layer-Control {
+    color: white;
+    margin: 5px;
+    text-align: center;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+div.Action-Title {
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}
+
+select.Action-Select {
+    font-size: 1em;
+    text-transform: capitalize;
+    align-self: center;
+}
+
+button.Apply-Button {
+    align-self: center;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+.Attribute-Labels {
+    font-size: 1.2em;
+    color: white;
+}
+
+.parametersList {
+    display: none;
+    justify-content: center;
+    flex-wrap: wrap;
+    border: groove;
+    margin: 10px;
+}
+
+.System-Mode-Table-Header {
+    margin: 0;
+    font-size: 1vw;
+    font-weight: bold;
+    color: #1c72ea;
+}
+
+.System-Mode-Table-Recording-Container {
+    margin-left: 10px;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+}

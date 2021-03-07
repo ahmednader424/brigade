@@ -1,0 +1,21 @@
+data = `{
+	"host"                 : "localhost",
+	"user"                 : "root",
+	"password"             : "",
+	"database_name"        : "battdb",
+	"tiles_full"           : "http://192.168.10.20:8090/full/{z}/{x}/{y}.png",
+	"tiles_base"           : "http://192.168.10.20:8090/base/{z}/{x}/{y}.png",
+	"tiles_names"          : "http://192.168.10.20:8090/names/{z}/{x}/{y}.png",
+	"tiles_roads"          : "http://192.168.10.20:8090/roads/{z}/{x}/{y}.png",
+	"tiles_borders"        : "http://192.168.10.20:8090/borders/{z}/{x}/{y}.png",
+	"tracks"               : "all_track",
+	"track_type"           : "trackidentificationtypes",
+	"battalions"           : "battalion_real",
+	"brigades"             : "brigade",
+	"battalion_parameter"  : "battalion_parameter",
+	"battalion_type"       : "battalion_type",
+	"engagement"           : "launcher_engagement",
+	"high_level_commands"  : "id_command_high_level",
+	"battalion_commands"   : "id_command_battalion",
+	"system_mode" : "system_mode"
+}`;

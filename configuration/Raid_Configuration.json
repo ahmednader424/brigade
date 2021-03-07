@@ -1,0 +1,13 @@
+{
+    "Recording_Interval_Time": "1",
+    "Host": "localhost",
+    "User": "root",
+    "Password": "",
+    "Database": "battdb",
+    "Table": "all_track,launcher_engagement",
+    "Valid_Tables": [
+        1,
+        0
+    ],
+    "Directory": "E:/RaidSaves"
+}
